@@ -137,9 +137,15 @@ class CorrePocoyo{
 	 * Aca va la implementación del nodo.
 	 */
 	struct Nodo {
-		
+		T corredor;
+		Nodo* siguiente;
+		Nodo* anterior;
 	};
-
+	
+	int cantidadCorredores;
+	Nodo* primerCorredor;
+	Nodo* ultimoCorredor;
+	Nodo* camara;
 };
 
 template<class T>
@@ -151,3 +157,83 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 
 #endif //CORREPOCOYO_H_
+	
+	template<typename T>
+	CorrePocoyo<T>::CorrePocoyo(){
+		cantidadCorredores = 0;
+		primerCorredor = NULL;
+		ultimoCorredor = NULL;
+		camara = NULL;
+	}
+	
+	template<typename T>
+	CorrePocoyo<T>::CorrePocoyo(const CorrePocoyo<T>& otro){
+	}
+	
+	template<typename T>
+	CorrePocoyo<T>::~CorrePocoyo(){
+	}
+
+	template<typename T>
+	void CorrePocoyo<T>::nuevoCorredor(const T& corredor){
+	}
+
+	template<typename T>
+	void CorrePocoyo<T>::nuevoCorredor(const T& corredor, const T& carrera){
+	}
+
+	template<typename T>
+	void CorrePocoyo<T>::seCansa(const T& corredor){
+	}
+	
+	template<typename T>
+	void CorrePocoyo<T>::sobrepasar(const T& corredor){
+	}
+	
+	template<typename T>
+	const T& CorrePocoyo<T>::corredorFilmado() const{
+		return camara->corredor;
+	}
+	
+	template<typename T>
+	void CorrePocoyo<T>::filmarProxPerdedor(){
+	}
+	
+	template<typename T>
+	void CorrePocoyo<T>::filmarProxExitoso(){
+	}
+	
+	template<typename T>
+	const T& CorrePocoyo<T>::damePrimero() const{
+		return primerCorredor->corredor;
+	}
+	
+	template<typename T>
+	int CorrePocoyo<T>::damePosicion(const T& corredor) const{
+		return 0;	//TODO
+	}
+	
+	template<typename T>
+	const T& CorrePocoyo<T>::dameCorredorEnPos(int i) const{
+		return primerCorredor->corredor;	//TODO
+	}
+	
+	template<typename T>
+	bool CorrePocoyo<T>::esVacia() const{
+		return cantidadCorredores == 0;
+	}
+	
+	template<typename T>
+	int CorrePocoyo<T>::tamanio() const{
+		return cantidadCorredores;
+	}
+	
+	template<typename T>
+	bool CorrePocoyo<T>::operator==(const CorrePocoyo<T>& otro) const{
+		return true;	//TODO
+	}
+
+	template<typename T>
+	ostream& CorrePocoyo<T>::mostrarCorrePocoyo(ostream& o) const{
+		return o;
+	}
