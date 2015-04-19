@@ -1,24 +1,11 @@
-CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
-
-SOURCES = tests.cpp
-OBJS = $(SOURCES:.cpp=.o)
-
-LIBS =
-
-TARGET =	tests
-
-$(TARGET):	$(OBJS)
-	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
-
-all:	$(TARGET)
+all: clean tests
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f tests
 
-.PHONY: run valgrind
-
-run: all
-	./$(TARGET)
+tests:
+	g++ -g -o tests -Wall -fmessage-length=0 tests.cpp
+	./tests
 
 valgrind: all
-	valgrind --leak-check=full ./$(TARGET)
+	valgrind --leak-check=full ./tests
