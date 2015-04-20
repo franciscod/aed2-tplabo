@@ -141,8 +141,8 @@ class CorrePocoyo{
 	};
 
 	int cantidadCorredores;
-	Nodo* primerCorredor;
-	Nodo* ultimoCorredor;
+	Nodo* primero;
+	Nodo* ultimo;
 	Nodo* camara;
 };
 
@@ -156,8 +156,8 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 	template<typename T>
 	CorrePocoyo<T>::CorrePocoyo(){
 		cantidadCorredores = 0;
-		primerCorredor = NULL;
-		ultimoCorredor = NULL;
+		primero = NULL;
+		ultimo = NULL;
 		camara = NULL;
 	}
 
