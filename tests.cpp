@@ -349,4 +349,3 @@ int main() {
     RUN_TEST(check_corredor_filmado2);
     return 0;
 }
-
