@@ -155,9 +155,6 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 // Implementación a hacer por los alumnos.
 
-
-#endif //CORREPOCOYO_H_
-
 	template<typename T>
 	CorrePocoyo<T>::CorrePocoyo(){
 		cantidadCorredores = 0;
@@ -237,3 +234,5 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 	ostream& CorrePocoyo<T>::mostrarCorrePocoyo(ostream& o) const{
 		return o;
 	}
+
+#endif //CORREPOCOYO_H_
