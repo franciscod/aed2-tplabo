@@ -54,6 +54,35 @@ void check_agregar_corredores2() {
     ASSERT_EQ(to_s(carrera), "[10, 20, 22, 27]");
 }
 
+void check_agregar_corredores3() {
+    CorrePocoyo<int> carrera;
+
+    carrera.nuevoCorredor(3);
+    ASSERT(!carrera.esVacia());
+    ASSERT_EQ(carrera.tamanio(), 1);
+    ASSERT_EQ(to_s(carrera), "[3]");
+
+    carrera.nuevoCorredor(2, 3);
+    ASSERT(!carrera.esVacia());
+    ASSERT_EQ(carrera.tamanio(), 2);
+    ASSERT_EQ(to_s(carrera), "[2, 3]");
+
+    carrera.nuevoCorredor(4);
+    ASSERT(!carrera.esVacia());
+    ASSERT_EQ(carrera.tamanio(), 3);
+    ASSERT_EQ(to_s(carrera), "[2, 3, 4]");
+
+    carrera.nuevoCorredor(1, 2);
+    ASSERT(!carrera.esVacia());
+    ASSERT_EQ(carrera.tamanio(), 4);
+    ASSERT_EQ(to_s(carrera), "[1, 2, 3, 4]");
+
+    carrera.nuevoCorredor(0, 1);
+    ASSERT(!carrera.esVacia());
+    ASSERT_EQ(carrera.tamanio(), 5);
+    ASSERT_EQ(to_s(carrera), "[0, 1, 2, 3, 4]");
+}
+
 
 /*
  * Se copia una carrera y verifica que sus atributos sean iguales.
@@ -78,6 +107,29 @@ void check_copiar_carrera() {
 
     ASSERT_EQ(carrera.corredorFilmado(),copia.corredorFilmado());
 
+}
+
+void check_copiar_carrera2() {
+    CorrePocoyo<int> carrera;
+    carrera.nuevoCorredor(3);
+    carrera.nuevoCorredor(2, 3);
+    carrera.nuevoCorredor(4);
+    carrera.nuevoCorredor(1, 2);
+    carrera.nuevoCorredor(0, 1);
+
+    CorrePocoyo<int> copia(carrera);
+
+    ASSERT_EQ((carrera==copia), true);
+    ASSERT_EQ((copia==carrera), true);
+    ASSERT_EQ((carrera.tamanio()==copia.tamanio()), true);
+
+    for(int i=1; i<=carrera.tamanio(); i++) {
+        ASSERT_EQ(carrera.dameCorredorEnPos(i), copia.dameCorredorEnPos(i));
+        ASSERT_EQ(i, carrera.damePosicion(carrera.dameCorredorEnPos(i)))
+        ASSERT_EQ(i, copia.damePosicion(copia.dameCorredorEnPos(i)));
+    }
+
+    ASSERT_EQ(carrera.corredorFilmado(), copia.corredorFilmado());
 }
 
 /*
@@ -212,7 +264,9 @@ int main() {
     RUN_TEST(check_crear_carrera_vacia);
     RUN_TEST(check_agregar_corredores);
     RUN_TEST(check_agregar_corredores2);
+    RUN_TEST(check_agregar_corredores3);
     RUN_TEST(check_copiar_carrera);
+    RUN_TEST(check_copiar_carrera2);
     RUN_TEST(check_se_cansa);
     RUN_TEST(check_sobrepasar);
     RUN_TEST(check_corredor_filmado);
