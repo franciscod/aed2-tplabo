@@ -48,6 +48,7 @@ class CorrePocoyo{
 	 * PRE: Existe el corredor
 	 */
 	void seCansa(const T&);
+
 	/*
 	 * El corredor pasa al que está adelante
 	 *
@@ -69,7 +70,8 @@ class CorrePocoyo{
 	 * PRE: Hay corredore en la CorrePocoyo.
 	 */
 	void filmarProxPerdedor();
-	    /*
+
+	/*
 	 * Devuelve el próximo elemento según el orden dado.
 	 * Pasa a filmar al corredor de adelante
 	 *
@@ -98,14 +100,10 @@ class CorrePocoyo{
 	 */
 	const T& dameCorredorEnPos(int) const;
 
-
-
-
 	/*
 	 * Dice si la CorrePocoyo tiene o no corredores.
 	 */
 	bool esVacia() const;
-
 
 	/*
 	 * Devuelve la cantidad de corredores de la CorrePocoyo.
@@ -165,26 +163,32 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 	template<typename T>
 	CorrePocoyo<T>::CorrePocoyo(const CorrePocoyo<T>& otro){
+		//TODO constructor por copia
 	}
 
 	template<typename T>
 	CorrePocoyo<T>::~CorrePocoyo(){
+		//TODO destructror
 	}
 
 	template<typename T>
 	void CorrePocoyo<T>::nuevoCorredor(const T& corredor){
+		//TODO
 	}
 
 	template<typename T>
-	void CorrePocoyo<T>::nuevoCorredor(const T& corredor, const T& carrera){
+	void CorrePocoyo<T>::nuevoCorredor(const T& corredor, const T& delanteDe){
+		//TODO
 	}
 
 	template<typename T>
 	void CorrePocoyo<T>::seCansa(const T& corredor){
+		//TODO
 	}
 
 	template<typename T>
 	void CorrePocoyo<T>::sobrepasar(const T& corredor){
+		//TODO
 	}
 
 	template<typename T>
@@ -194,10 +198,12 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 	template<typename T>
 	void CorrePocoyo<T>::filmarProxPerdedor(){
+		//TODO
 	}
 
 	template<typename T>
 	void CorrePocoyo<T>::filmarProxExitoso(){
+		//TODO
 	}
 
 	template<typename T>
@@ -232,7 +238,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 	template<typename T>
 	ostream& CorrePocoyo<T>::mostrarCorrePocoyo(ostream& o) const{
-		return o;
+		return o; //FIXME
 	}
 
 #endif //CORREPOCOYO_H_
