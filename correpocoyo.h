@@ -143,8 +143,8 @@ class CorrePocoyo{
 	};
 	
 	int cantidadCorredores;
-	Nodo* primerCorredor;
-	Nodo* ultimoCorredor;
+	Nodo* nodoPrimero;
+	Nodo* nodoUltimo;
 	Nodo* camara;
 };
 
@@ -161,8 +161,8 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 	template<typename T>
 	CorrePocoyo<T>::CorrePocoyo(){
 		cantidadCorredores = 0;
-		primerCorredor = NULL;
-		ultimoCorredor = NULL;
+		nodoPrimero = NULL;
+		nodoUltimo = NULL;
 		camara = NULL;
 	}
 	
@@ -176,18 +176,121 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 	template<typename T>
 	void CorrePocoyo<T>::nuevoCorredor(const T& corredor){
+		Nodo* nodoNuevo = new Nodo;
+		nodoNuevo->corredor = corredor;
+		nodoNuevo->anterior = NULL;
+		if(nodoUltimo == NULL){
+			nodoNuevo->siguiente = NULL;
+
+			nodoPrimero = nodoNuevo;
+			nodoUltimo = nodoNuevo;
+
+			cantidadCorredores = 1;
+			camara = nodoNuevo;
+		}	
+		else{
+			nodoUltimo->anterior = nodoNuevo;
+			nodoNuevo->siguiente = nodoUltimo;
+			
+			nodoUltimo = nodoNuevo;
+
+			cantidadCorredores += 1;
+		}
 	}
 
 	template<typename T>
-	void CorrePocoyo<T>::nuevoCorredor(const T& corredor, const T& carrera){
+	void CorrePocoyo<T>::nuevoCorredor(const T& corredor, const T& otroCorredor){
+		Nodo* nodoNuevo = new Nodo;
+		nodoNuevo->corredor = corredor;
+		
+		Nodo* nodoOtro = nodoUltimo;
+		while(nodoOtro->corredor != otroCorredor){
+			nodoOtro = nodoOtro->siguiente;
+		}
+		Nodo* nodoSiguienteOtro = nodoOtro->siguiente;
+
+		if(nodoSiguienteOtro != NULL){
+			nodoSiguienteOtro->anterior = nodoNuevo;
+			nodoNuevo->siguiente = nodoSiguienteOtro;
+		}
+		else{
+			nodoNuevo->siguiente = NULL;
+			nodoPrimero = nodoNuevo;
+		}
+
+		nodoNuevo->anterior = nodoOtro;
+		
+		nodoOtro->siguiente = nodoNuevo;
+
+		cantidadCorredores += 1;
 	}
 
 	template<typename T>
 	void CorrePocoyo<T>::seCansa(const T& corredor){
+		Nodo* nodoCansado = nodoUltimo;
+		while(nodoCansado->corredor != corredor){
+			nodoCansado = nodoCansado->siguiente;
+		}
+
+		Nodo* nodoSiguiente = nodoCansado->siguiente;
+		Nodo* nodoAnterior = nodoCansado->anterior;
+		if(nodoSiguiente != NULL){
+			nodoSiguiente->anterior = nodoAnterior;
+			if(nodoAnterior != NULL){
+				nodoAnterior->siguiente = nodoSiguiente;
+			}
+			else{
+				nodoUltimo = nodoSiguiente;
+			}
+			if(corredorFilmado() == corredor){
+				camara = nodoSiguiente;
+			}
+		}
+		else{
+			if(nodoAnterior != NULL){
+				nodoAnterior->siguiente = NULL;
+				nodoPrimero = nodoAnterior;
+				if(corredorFilmado() == corredor){
+					camara = nodoAnterior;
+				}
+			}
+			else{
+				nodoPrimero = NULL;
+				nodoUltimo = NULL;
+				if(corredorFilmado() == corredor){
+					camara = NULL;
+				}
+			}
+		}
+		delete nodoCansado;
 	}
 	
 	template<typename T>
 	void CorrePocoyo<T>::sobrepasar(const T& corredor){
+		Nodo* nodoCorredor = nodoUltimo;
+		while(nodoCorredor->corredor != corredor){
+			nodoCorredor = nodoCorredor->siguiente;
+		}
+		Nodo* nodoSiguiente = nodoCorredor->siguiente;
+		Nodo* nodoAnterior = nodoCorredor->anterior;
+
+		nodoSiguiente->anterior = nodoAnterior;
+
+		if(nodoAnterior != NULL){
+			nodoAnterior->siguiente = nodoSiguiente;
+		}
+		else{
+			nodoUltimo = nodoSiguiente;
+		}
+
+		nodoCorredor->anterior = nodoSiguiente;
+		nodoCorredor->siguiente = nodoSiguiente->siguiente;
+
+		nodoSiguiente->siguiente = nodoCorredor;
+
+		if(nodoCorredor->siguiente == NULL){
+			nodoPrimero = nodoCorredor;
+		}
 	}
 	
 	template<typename T>
@@ -205,7 +308,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 	
 	template<typename T>
 	const T& CorrePocoyo<T>::damePrimero() const{
-		return primerCorredor->corredor;
+		return nodoPrimero->corredor;
 	}
 	
 	template<typename T>
@@ -215,7 +318,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 	
 	template<typename T>
 	const T& CorrePocoyo<T>::dameCorredorEnPos(int i) const{
-		return primerCorredor->corredor;	//TODO
+		return nodoPrimero->corredor;	//TODO
 	}
 	
 	template<typename T>
@@ -235,5 +338,15 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 	template<typename T>
 	ostream& CorrePocoyo<T>::mostrarCorrePocoyo(ostream& o) const{
+		o<<"[";
+		Nodo* nodoCorredor = nodoPrimero;
+		if(nodoCorredor != NULL){
+			o<<nodoCorredor->corredor;
+			while(nodoCorredor->anterior != NULL){
+				nodoCorredor = nodoCorredor->anterior;
+				o<<", "<<nodoCorredor->corredor;
+			}
+		}
+		o<<"]";
 		return o;
 	}
