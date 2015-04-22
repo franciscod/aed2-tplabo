@@ -157,52 +157,31 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 	template<typename T>
 	CorrePocoyo<T>::CorrePocoyo(){
+
 		this->cantidadCorredores = 0;
 		this->primero = NULL;
 		this->ultimo = NULL;
 		this->camara = NULL;
+
 	}
 
 	template<typename T>
 	CorrePocoyo<T>::CorrePocoyo(const CorrePocoyo<T>& otro){
 
 		this->cantidadCorredores = 0;
+		this->primero = NULL;
+		this->ultimo = NULL;
+		this->camara = NULL;
 
 		Nodo *c = otro.primero;
 
-		Nodo* n = new Nodo();
-		n->corredor = T(c->corredor);
-
-		this->primero = n;
-		this->camara = n;
-
-		this->cantidadCorredores++;
-
-		c = c->atras;
-
-		Nodo* m;
-
 		while (c != NULL) {
-			m = n;
-			n = new Nodo();
-			n->corredor = T(c->corredor);
-
-			n->adelante = m;
-			m->atras = n;
-
-			this->ultimo = n;
-
+			this->nuevoCorredor(c->corredor);
 			if (c == otro.camara) {
-				this->camara = n;
+				this->camara = this->ultimo;
 			}
-
-			this->cantidadCorredores++;
 			c = c->atras;
-
 		}
-
-		this->ultimo = n;
-
 	}
 
 	template<typename T>
@@ -225,6 +204,8 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 		Nodo* n = new Nodo();
 		n->corredor = T(corredor);
+		n->adelante = NULL;
+		n->atras = NULL;
 
 		if (this->esVacia()) {
 			this->primero = n;
@@ -248,6 +229,8 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 		Nodo* n = new Nodo();
 		n->corredor = T(corredor);
+		n->adelante = NULL;
+		n->atras = NULL;
 
 		Nodo *c = this->primero;
 
@@ -446,7 +429,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 		Nodo *c = this->primero;
 
-		while (c != NULL && (c->corredor != corredor)) {
+		while ((c != NULL) && (c->corredor != corredor)) {
 			c = c->atras;
 		}
 
