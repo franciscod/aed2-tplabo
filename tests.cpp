@@ -251,9 +251,11 @@ void check_corredor_filmado2() {
     ASSERT_EQ(carrera.corredorFilmado(), 2);
     carrera.filmarProxPerdedor();
     ASSERT_EQ(carrera.corredorFilmado(), 3);
-    carrera.filmarProxPerdedor();
-    ASSERT_EQ(carrera.corredorFilmado(), 4);
     carrera.filmarProxPerdedor(); // el ultimo es el mas perdedor, la camara se queda ahi
+
+    carrera.nuevoCorredor(4);
+    ASSERT_EQ(carrera.corredorFilmado(), 3);
+    carrera.filmarProxPerdedor();
     ASSERT_EQ(carrera.corredorFilmado(), 4);
     carrera.seCansa(4);
     ASSERT_EQ(carrera.corredorFilmado(), 3); // si se cansa el ultimo, la camara va al nuevo ultimo
@@ -270,8 +272,8 @@ void check_corredor_filmado2() {
     carrera.nuevoCorredor(5);
     carrera.nuevoCorredor(6);
 
-    carrera.filmarProxExitoso();
-    carrera.filmarProxExitoso();
+    carrera.filmarProxPerdedor();
+    carrera.filmarProxPerdedor();
 
     ASSERT_EQ(carrera.corredorFilmado(), 4);
 
@@ -339,7 +341,7 @@ int main() {
     RUN_TEST(check_corredor_filmado);
     RUN_TEST(check_primero);
     RUN_TEST(check_posicion);
-    
+
     // tests que agregamos nosotros
     RUN_TEST(check_agregar_corredores3);
     RUN_TEST(check_agregar_corredores4);
