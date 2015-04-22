@@ -63,7 +63,7 @@ class CorrePocoyo{
 	 */
 	const T& corredorFilmado() const;
 
-    /*
+	/*
 	 * Devuelve el próximo elemento según el orden dado.
 	 * Pasa a filmar al corredor de atás
 	 *
@@ -372,8 +372,8 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 	template<typename T>
 	bool CorrePocoyo<T>::operator==(const CorrePocoyo<T>& otro) const{
 		if ( !( (this->cantidadCorredores == otro.tamanio())
-		     &&  (this->camara->corredor == otro.corredorFilmado())
-		     &&  (this->primero->corredor == otro.damePrimero()) )
+		    &&  (this->camara->corredor == otro.corredorFilmado())
+		    &&  (this->primero->corredor == otro.damePrimero()) )
 		) {
 			return false;
 		}

@@ -7,7 +7,7 @@
 
 template<typename T>
 string to_s(const T& m) {
- 	ostringstream os;
+	ostringstream os;
 	os << m;
 	return os.str();
  }
@@ -17,89 +17,89 @@ string to_s(const T& m) {
  * Crea una carrera de int vacia y no agrega elementos
  */
 void check_crear_carrera_vacia() {
-    CorrePocoyo<int> carrera;
+	CorrePocoyo<int> carrera;
 
-    ASSERT_EQ(carrera.esVacia(), true);
+	ASSERT_EQ(carrera.esVacia(), true);
 
-    ASSERT_EQ(carrera.tamanio(), 0);
+	ASSERT_EQ(carrera.tamanio(), 0);
 }
 
 /*
  * Agrega 3 elementos y verifica que esten agregados segun lo pedido
  */
 void check_agregar_corredores() {
-    CorrePocoyo<int> carrera;
+	CorrePocoyo<int> carrera;
 
-    carrera.nuevoCorredor(14);
-    carrera.nuevoCorredor(3,14);
-    carrera.nuevoCorredor(15);
+	carrera.nuevoCorredor(14);
+	carrera.nuevoCorredor(3,14);
+	carrera.nuevoCorredor(15);
 
-    ASSERT(!carrera.esVacia());
+	ASSERT(!carrera.esVacia());
 
-    ASSERT_EQ(to_s(carrera), "[3, 14, 15]");
+	ASSERT_EQ(to_s(carrera), "[3, 14, 15]");
 
-    ASSERT_EQ(carrera.tamanio(), 3);
+	ASSERT_EQ(carrera.tamanio(), 3);
 }
 
 /*
  * Agrega corredores y verifica que esten agregados donde corresponde
  */
 void check_agregar_corredores2() {
-    CorrePocoyo<int> carrera;
-    carrera.nuevoCorredor(10);
-    carrera.nuevoCorredor(22);
-    carrera.nuevoCorredor(27);
-    carrera.nuevoCorredor(20,22);
+	CorrePocoyo<int> carrera;
+	carrera.nuevoCorredor(10);
+	carrera.nuevoCorredor(22);
+	carrera.nuevoCorredor(27);
+	carrera.nuevoCorredor(20,22);
 
-    ASSERT_EQ(to_s(carrera), "[10, 20, 22, 27]");
+	ASSERT_EQ(to_s(carrera), "[10, 20, 22, 27]");
 }
 
 void check_agregar_corredores3() {
-    CorrePocoyo<int> carrera;
+	CorrePocoyo<int> carrera;
 
-    carrera.nuevoCorredor(3);
-    ASSERT(!carrera.esVacia());
-    ASSERT_EQ(carrera.tamanio(), 1);
-    ASSERT_EQ(to_s(carrera), "[3]");
+	carrera.nuevoCorredor(3);
+	ASSERT(!carrera.esVacia());
+	ASSERT_EQ(carrera.tamanio(), 1);
+	ASSERT_EQ(to_s(carrera), "[3]");
 
-    carrera.nuevoCorredor(2, 3);
-    ASSERT(!carrera.esVacia());
-    ASSERT_EQ(carrera.tamanio(), 2);
-    ASSERT_EQ(to_s(carrera), "[2, 3]");
+	carrera.nuevoCorredor(2, 3);
+	ASSERT(!carrera.esVacia());
+	ASSERT_EQ(carrera.tamanio(), 2);
+	ASSERT_EQ(to_s(carrera), "[2, 3]");
 
-    carrera.nuevoCorredor(4);
-    ASSERT(!carrera.esVacia());
-    ASSERT_EQ(carrera.tamanio(), 3);
-    ASSERT_EQ(to_s(carrera), "[2, 3, 4]");
+	carrera.nuevoCorredor(4);
+	ASSERT(!carrera.esVacia());
+	ASSERT_EQ(carrera.tamanio(), 3);
+	ASSERT_EQ(to_s(carrera), "[2, 3, 4]");
 
-    carrera.nuevoCorredor(1, 2);
-    ASSERT(!carrera.esVacia());
-    ASSERT_EQ(carrera.tamanio(), 4);
-    ASSERT_EQ(to_s(carrera), "[1, 2, 3, 4]");
+	carrera.nuevoCorredor(1, 2);
+	ASSERT(!carrera.esVacia());
+	ASSERT_EQ(carrera.tamanio(), 4);
+	ASSERT_EQ(to_s(carrera), "[1, 2, 3, 4]");
 
-    carrera.nuevoCorredor(0, 1);
-    ASSERT(!carrera.esVacia());
-    ASSERT_EQ(carrera.tamanio(), 5);
-    ASSERT_EQ(to_s(carrera), "[0, 1, 2, 3, 4]");
+	carrera.nuevoCorredor(0, 1);
+	ASSERT(!carrera.esVacia());
+	ASSERT_EQ(carrera.tamanio(), 5);
+	ASSERT_EQ(to_s(carrera), "[0, 1, 2, 3, 4]");
 }
 
 
 void check_agregar_corredores4() {
-    CorrePocoyo<int> carrera;
+	CorrePocoyo<int> carrera;
 
-    // se ignora agregar un corredor que ya estaba
+	// se ignora agregar un corredor que ya estaba
 
-    carrera.nuevoCorredor(1);
-    ASSERT_EQ(carrera.tamanio(), 1);
-    ASSERT_EQ(to_s(carrera), "[1]");
+	carrera.nuevoCorredor(1);
+	ASSERT_EQ(carrera.tamanio(), 1);
+	ASSERT_EQ(to_s(carrera), "[1]");
 
-    carrera.nuevoCorredor(1, 1);
-    ASSERT_EQ(carrera.tamanio(), 1);
-    ASSERT_EQ(to_s(carrera), "[1]");
+	carrera.nuevoCorredor(1, 1);
+	ASSERT_EQ(carrera.tamanio(), 1);
+	ASSERT_EQ(to_s(carrera), "[1]");
 
-    carrera.nuevoCorredor(1);
-    ASSERT_EQ(carrera.tamanio(), 1);
-    ASSERT_EQ(to_s(carrera), "[1]");
+	carrera.nuevoCorredor(1);
+	ASSERT_EQ(carrera.tamanio(), 1);
+	ASSERT_EQ(to_s(carrera), "[1]");
 
 }
 
@@ -112,44 +112,44 @@ void check_agregar_corredores4() {
  */
 
 void check_copiar_carrera() {
-    CorrePocoyo<int> carrera;
-    carrera.nuevoCorredor(10);
-    carrera.nuevoCorredor(22);
-    carrera.nuevoCorredor(27);
-    carrera.nuevoCorredor(20,22);
+	CorrePocoyo<int> carrera;
+	carrera.nuevoCorredor(10);
+	carrera.nuevoCorredor(22);
+	carrera.nuevoCorredor(27);
+	carrera.nuevoCorredor(20,22);
 
-    CorrePocoyo<int> copia(carrera);
+	CorrePocoyo<int> copia(carrera);
 
-    ASSERT_EQ((carrera==copia),true);
+	ASSERT_EQ((carrera==copia),true);
 
-    for(int i=1;i<=carrera.tamanio();i++)
-        ASSERT_EQ(carrera.dameCorredorEnPos(i),copia.dameCorredorEnPos(i));
+	for(int i=1;i<=carrera.tamanio();i++)
+		ASSERT_EQ(carrera.dameCorredorEnPos(i),copia.dameCorredorEnPos(i));
 
-    ASSERT_EQ(carrera.corredorFilmado(),copia.corredorFilmado());
+	ASSERT_EQ(carrera.corredorFilmado(),copia.corredorFilmado());
 
 }
 
 void check_copiar_carrera2() {
-    CorrePocoyo<int> carrera;
-    carrera.nuevoCorredor(3);
-    carrera.nuevoCorredor(2, 3);
-    carrera.nuevoCorredor(4);
-    carrera.nuevoCorredor(1, 2);
-    carrera.nuevoCorredor(0, 1);
+	CorrePocoyo<int> carrera;
+	carrera.nuevoCorredor(3);
+	carrera.nuevoCorredor(2, 3);
+	carrera.nuevoCorredor(4);
+	carrera.nuevoCorredor(1, 2);
+	carrera.nuevoCorredor(0, 1);
 
-    CorrePocoyo<int> copia(carrera);
+	CorrePocoyo<int> copia(carrera);
 
-    ASSERT_EQ((carrera==copia), true);
-    ASSERT_EQ((copia==carrera), true);
-    ASSERT_EQ((carrera.tamanio()==copia.tamanio()), true);
+	ASSERT_EQ((carrera==copia), true);
+	ASSERT_EQ((copia==carrera), true);
+	ASSERT_EQ((carrera.tamanio()==copia.tamanio()), true);
 
-    for(int i=1; i<=carrera.tamanio(); i++) {
-        ASSERT_EQ(carrera.dameCorredorEnPos(i), copia.dameCorredorEnPos(i));
-        ASSERT_EQ(i, carrera.damePosicion(carrera.dameCorredorEnPos(i)))
-        ASSERT_EQ(i, copia.damePosicion(copia.dameCorredorEnPos(i)));
-    }
+	for(int i=1; i<=carrera.tamanio(); i++) {
+		ASSERT_EQ(carrera.dameCorredorEnPos(i), copia.dameCorredorEnPos(i));
+		ASSERT_EQ(i, carrera.damePosicion(carrera.dameCorredorEnPos(i)))
+		ASSERT_EQ(i, copia.damePosicion(copia.dameCorredorEnPos(i)));
+	}
 
-    ASSERT_EQ(carrera.corredorFilmado(), copia.corredorFilmado());
+	ASSERT_EQ(carrera.corredorFilmado(), copia.corredorFilmado());
 }
 
 /*
@@ -157,27 +157,27 @@ void check_copiar_carrera2() {
  */
 
 void check_se_cansa() {
-    CorrePocoyo<int> carrera;
-    carrera.nuevoCorredor(10);
-    carrera.nuevoCorredor(22);
-    carrera.nuevoCorredor(27);
-    carrera.nuevoCorredor(20,22);
+	CorrePocoyo<int> carrera;
+	carrera.nuevoCorredor(10);
+	carrera.nuevoCorredor(22);
+	carrera.nuevoCorredor(27);
+	carrera.nuevoCorredor(20,22);
 
-    carrera.seCansa(20);
+	carrera.seCansa(20);
 
-    ASSERT_EQ(to_s(carrera), "[10, 22, 27]");
+	ASSERT_EQ(to_s(carrera), "[10, 22, 27]");
 
-    carrera.seCansa(10);
+	carrera.seCansa(10);
 
-    ASSERT_EQ(to_s(carrera), "[22, 27]");
+	ASSERT_EQ(to_s(carrera), "[22, 27]");
 
-    carrera.seCansa(27);
+	carrera.seCansa(27);
 
-    ASSERT_EQ(to_s(carrera), "[22]");
+	ASSERT_EQ(to_s(carrera), "[22]");
 
-    carrera.seCansa(22);
+	carrera.seCansa(22);
 
-    ASSERT_EQ(to_s(carrera), "[]");
+	ASSERT_EQ(to_s(carrera), "[]");
 }
 
 /*
@@ -185,23 +185,23 @@ void check_se_cansa() {
  */
 
 void check_sobrepasar() {
-    CorrePocoyo<int> carrera;
-    carrera.nuevoCorredor(10);
-    carrera.nuevoCorredor(22);
-    carrera.nuevoCorredor(27);
-    carrera.nuevoCorredor(20,22);
+	CorrePocoyo<int> carrera;
+	carrera.nuevoCorredor(10);
+	carrera.nuevoCorredor(22);
+	carrera.nuevoCorredor(27);
+	carrera.nuevoCorredor(20,22);
 
-    carrera.sobrepasar(22);
+	carrera.sobrepasar(22);
 
-    ASSERT_EQ(to_s(carrera), "[10, 22, 20, 27]");
+	ASSERT_EQ(to_s(carrera), "[10, 22, 20, 27]");
 
-    carrera.sobrepasar(22);
+	carrera.sobrepasar(22);
 
-    ASSERT_EQ(to_s(carrera), "[22, 10, 20, 27]");
+	ASSERT_EQ(to_s(carrera), "[22, 10, 20, 27]");
 
-    carrera.sobrepasar(27);
+	carrera.sobrepasar(27);
 
-    ASSERT_EQ(to_s(carrera), "[22, 10, 27, 20]");
+	ASSERT_EQ(to_s(carrera), "[22, 10, 27, 20]");
 }
 
 /*
@@ -209,76 +209,76 @@ void check_sobrepasar() {
  */
 
 void check_corredor_filmado() {
-    CorrePocoyo<int> carrera;
-    carrera.nuevoCorredor(10);
+	CorrePocoyo<int> carrera;
+	carrera.nuevoCorredor(10);
 
-    ASSERT_EQ(carrera.corredorFilmado(), 10);
+	ASSERT_EQ(carrera.corredorFilmado(), 10);
 
-    carrera.nuevoCorredor(22);
-    carrera.nuevoCorredor(27);
-    carrera.nuevoCorredor(20,22);
+	carrera.nuevoCorredor(22);
+	carrera.nuevoCorredor(27);
+	carrera.nuevoCorredor(20,22);
 
-    carrera.filmarProxPerdedor();
+	carrera.filmarProxPerdedor();
 
-    ASSERT_EQ(carrera.corredorFilmado(),20);
+	ASSERT_EQ(carrera.corredorFilmado(),20);
 
-    carrera.sobrepasar(22);
+	carrera.sobrepasar(22);
 
-    ASSERT_EQ(carrera.corredorFilmado(),20);
+	ASSERT_EQ(carrera.corredorFilmado(),20);
 
-    carrera.filmarProxExitoso();
+	carrera.filmarProxExitoso();
 
-    ASSERT_EQ(carrera.corredorFilmado(),22);
+	ASSERT_EQ(carrera.corredorFilmado(),22);
 }
 
 void check_corredor_filmado2() {
-    CorrePocoyo<int> carrera;
-    carrera.nuevoCorredor(1);
+	CorrePocoyo<int> carrera;
+	carrera.nuevoCorredor(1);
 
-    ASSERT_EQ(carrera.corredorFilmado(), 1);
-    carrera.nuevoCorredor(2);
-    carrera.nuevoCorredor(3);
+	ASSERT_EQ(carrera.corredorFilmado(), 1);
+	carrera.nuevoCorredor(2);
+	carrera.nuevoCorredor(3);
 
-    ASSERT_EQ(carrera.corredorFilmado(), 1); // agregar corredores no mueve la camara
+	ASSERT_EQ(carrera.corredorFilmado(), 1); // agregar corredores no mueve la camara
 
-    carrera.filmarProxPerdedor();
-    ASSERT_EQ(carrera.corredorFilmado(), 2);
-    carrera.filmarProxExitoso();
-    ASSERT_EQ(carrera.corredorFilmado(), 1);
-    carrera.filmarProxExitoso(); // el primero es el mas exitoso, la camara se queda ahi
-    ASSERT_EQ(carrera.corredorFilmado(), 1);
-    carrera.filmarProxPerdedor();
-    ASSERT_EQ(carrera.corredorFilmado(), 2);
-    carrera.filmarProxPerdedor();
-    ASSERT_EQ(carrera.corredorFilmado(), 3);
-    carrera.filmarProxPerdedor(); // el ultimo es el mas perdedor, la camara se queda ahi
+	carrera.filmarProxPerdedor();
+	ASSERT_EQ(carrera.corredorFilmado(), 2);
+	carrera.filmarProxExitoso();
+	ASSERT_EQ(carrera.corredorFilmado(), 1);
+	carrera.filmarProxExitoso(); // el primero es el mas exitoso, la camara se queda ahi
+	ASSERT_EQ(carrera.corredorFilmado(), 1);
+	carrera.filmarProxPerdedor();
+	ASSERT_EQ(carrera.corredorFilmado(), 2);
+	carrera.filmarProxPerdedor();
+	ASSERT_EQ(carrera.corredorFilmado(), 3);
+	carrera.filmarProxPerdedor(); // el ultimo es el mas perdedor, la camara se queda ahi
 
-    carrera.nuevoCorredor(4);
-    ASSERT_EQ(carrera.corredorFilmado(), 3);
-    carrera.filmarProxPerdedor();
-    ASSERT_EQ(carrera.corredorFilmado(), 4);
-    carrera.seCansa(4);
-    ASSERT_EQ(carrera.corredorFilmado(), 3); // si se cansa el ultimo, la camara va al nuevo ultimo
-    carrera.filmarProxExitoso();
-    carrera.filmarProxExitoso();
-    ASSERT_EQ(carrera.corredorFilmado(), 1);
-    carrera.seCansa(1); // si se cansa el primero, la camara va al nuevo primero
-    ASSERT_EQ(carrera.corredorFilmado(), 2);
-    carrera.seCansa(3);  // si se cansa uno que no esta siendo filmado, se sigue filmando al mismo
-    ASSERT_EQ(carrera.corredorFilmado(), 2);
+	carrera.nuevoCorredor(4);
+	ASSERT_EQ(carrera.corredorFilmado(), 3);
+	carrera.filmarProxPerdedor();
+	ASSERT_EQ(carrera.corredorFilmado(), 4);
+	carrera.seCansa(4);
+	ASSERT_EQ(carrera.corredorFilmado(), 3); // si se cansa el ultimo, la camara va al nuevo ultimo
+	carrera.filmarProxExitoso();
+	carrera.filmarProxExitoso();
+	ASSERT_EQ(carrera.corredorFilmado(), 1);
+	carrera.seCansa(1); // si se cansa el primero, la camara va al nuevo primero
+	ASSERT_EQ(carrera.corredorFilmado(), 2);
+	carrera.seCansa(3);  // si se cansa uno que no esta siendo filmado, se sigue filmando al mismo
+	ASSERT_EQ(carrera.corredorFilmado(), 2);
 
-    carrera.nuevoCorredor(3);
-    carrera.nuevoCorredor(4);
-    carrera.nuevoCorredor(5);
-    carrera.nuevoCorredor(6);
+	carrera.nuevoCorredor(3);
+	carrera.nuevoCorredor(4);
+	carrera.nuevoCorredor(5);
+	carrera.nuevoCorredor(6);
 
-    carrera.filmarProxPerdedor();
-    carrera.filmarProxPerdedor();
+	carrera.filmarProxPerdedor();
+	carrera.filmarProxPerdedor();
 
-    ASSERT_EQ(carrera.corredorFilmado(), 4);
+	ASSERT_EQ(carrera.corredorFilmado(), 4);
 
-    carrera.seCansa(4);
-    ASSERT_EQ(carrera.corredorFilmado(), 5); // si se cansa uno que tiene alguien detras, filmo a ese
+	carrera.seCansa(4);
+	ASSERT_EQ(carrera.corredorFilmado(), 5); // si se cansa uno que tiene alguien detras, filmo a ese
 
 }
 
@@ -287,22 +287,22 @@ void check_corredor_filmado2() {
  */
 
 void check_primero() {
-    CorrePocoyo<int> carrera;
-    carrera.nuevoCorredor(1);
+	CorrePocoyo<int> carrera;
+	carrera.nuevoCorredor(1);
 
-    ASSERT_EQ(carrera.damePrimero(),1);
+	ASSERT_EQ(carrera.damePrimero(),1);
 
-    carrera.nuevoCorredor(2,1);
+	carrera.nuevoCorredor(2,1);
 
-    ASSERT_EQ(carrera.damePrimero(),2);
+	ASSERT_EQ(carrera.damePrimero(),2);
 
-    carrera.nuevoCorredor(3,1);
+	carrera.nuevoCorredor(3,1);
 
-    ASSERT_EQ(carrera.damePrimero(),2);
+	ASSERT_EQ(carrera.damePrimero(),2);
 
-    carrera.seCansa(2);
+	carrera.seCansa(2);
 
-    ASSERT_EQ(carrera.damePrimero(),3);
+	ASSERT_EQ(carrera.damePrimero(),3);
 }
 
 /*
@@ -310,25 +310,25 @@ void check_primero() {
  */
 
 void check_posicion() {
-    CorrePocoyo<int> carrera;
-    carrera.nuevoCorredor(1);
-    carrera.nuevoCorredor(2);
-    carrera.nuevoCorredor(3);
-    carrera.nuevoCorredor(5);
-    carrera.nuevoCorredor(8);
+	CorrePocoyo<int> carrera;
+	carrera.nuevoCorredor(1);
+	carrera.nuevoCorredor(2);
+	carrera.nuevoCorredor(3);
+	carrera.nuevoCorredor(5);
+	carrera.nuevoCorredor(8);
 
-    ASSERT_EQ(carrera.damePosicion(1),1);
-    ASSERT_EQ(carrera.damePosicion(3),3);
-    ASSERT_EQ(carrera.damePosicion(8),5);
+	ASSERT_EQ(carrera.damePosicion(1),1);
+	ASSERT_EQ(carrera.damePosicion(3),3);
+	ASSERT_EQ(carrera.damePosicion(8),5);
 
-    ASSERT_EQ(carrera.dameCorredorEnPos(1),1);
-    ASSERT_EQ(carrera.dameCorredorEnPos(3),3);
-    ASSERT_EQ(carrera.dameCorredorEnPos(5),8);
+	ASSERT_EQ(carrera.dameCorredorEnPos(1),1);
+	ASSERT_EQ(carrera.dameCorredorEnPos(3),3);
+	ASSERT_EQ(carrera.dameCorredorEnPos(5),8);
 
-    carrera.seCansa(5);
+	carrera.seCansa(5);
 
-    ASSERT_EQ(carrera.damePosicion(8),4);
-    ASSERT_EQ(carrera.dameCorredorEnPos(4),8);
+	ASSERT_EQ(carrera.damePosicion(8),4);
+	ASSERT_EQ(carrera.dameCorredorEnPos(4),8);
 }
 
 void check_carrera_chars(){
@@ -341,62 +341,62 @@ void check_carrera_chars(){
 
 	carrera.nuevoCorredor('x','3');
 	ASSERT_EQ(to_s(carrera), "[1, 2, x, 3]");
-	
+
 	carrera.seCansa('1');
 	carrera.seCansa('2');
 
 	ASSERT_EQ(to_s(carrera), "[x, 3]");
 
-    	ASSERT_EQ(carrera.damePrimero(),'x');
-    	
+	ASSERT_EQ(carrera.damePrimero(),'x');
+
 	ASSERT_EQ(carrera.corredorFilmado(), 'x');
-	
-	carrera.sobrepasar('3');	
+
+	carrera.sobrepasar('3');
 
 	ASSERT_EQ(to_s(carrera), "[3, x]");
 
 	ASSERT_EQ(carrera.damePosicion('x'),2);
 
 	ASSERT_EQ(carrera.dameCorredorEnPos(2),'x');
-}	
+}
 
 void check_carrera_inception(){
 	CorrePocoyo< CorrePocoyo<int> > inception;
 	CorrePocoyo<int> corredor, corredor2;
 	inception.nuevoCorredor(corredor);
-	
+
 	ASSERT_EQ(inception.tamanio(),1);
 	ASSERT_EQ(to_s(inception), "[[]]");
 
-        corredor2.nuevoCorredor(1);
-        corredor2.nuevoCorredor(42);
+	corredor2.nuevoCorredor(1);
+	corredor2.nuevoCorredor(42);
 
-        inception.nuevoCorredor(corredor2);
+	inception.nuevoCorredor(corredor2);
 
 	ASSERT_EQ(to_s(inception), "[[], [1, 42]]");
 
-        corredor2.sobrepasar(42);
+	corredor2.sobrepasar(42);
 
 	ASSERT_EQ(to_s(inception), "[[], [1, 42]]");
 }
 
 int main() {
-    RUN_TEST(check_crear_carrera_vacia);
-    RUN_TEST(check_agregar_corredores);
-    RUN_TEST(check_agregar_corredores2);
-    RUN_TEST(check_copiar_carrera);
-    RUN_TEST(check_se_cansa);
-    RUN_TEST(check_sobrepasar);
-    RUN_TEST(check_corredor_filmado);
-    RUN_TEST(check_primero);
-    RUN_TEST(check_posicion);
+	RUN_TEST(check_crear_carrera_vacia);
+	RUN_TEST(check_agregar_corredores);
+	RUN_TEST(check_agregar_corredores2);
+	RUN_TEST(check_copiar_carrera);
+	RUN_TEST(check_se_cansa);
+	RUN_TEST(check_sobrepasar);
+	RUN_TEST(check_corredor_filmado);
+	RUN_TEST(check_primero);
+	RUN_TEST(check_posicion);
 
-    // tests que agregamos nosotros
-    RUN_TEST(check_agregar_corredores3);
-    RUN_TEST(check_agregar_corredores4);
-    RUN_TEST(check_copiar_carrera2);
-    RUN_TEST(check_corredor_filmado2);
-    RUN_TEST(check_carrera_chars);
-    RUN_TEST(check_carrera_inception); 
-    return 0;
+	// tests que agregamos nosotros
+	RUN_TEST(check_agregar_corredores3);
+	RUN_TEST(check_agregar_corredores4);
+	RUN_TEST(check_copiar_carrera2);
+	RUN_TEST(check_corredor_filmado2);
+	RUN_TEST(check_carrera_chars);
+	RUN_TEST(check_carrera_inception);
+	return 0;
 }
