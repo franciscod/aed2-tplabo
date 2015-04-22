@@ -331,6 +331,32 @@ void check_posicion() {
     ASSERT_EQ(carrera.dameCorredorEnPos(4),8);
 }
 
+void check_carrera_chars(){
+	CorrePocoyo<char> carreraChars;
+	carreraChars.nuevoCorredor('1');
+	carreraChars.nuevoCorredor('2');
+	carreraChars.nuevoCorredor('3');
+
+	ASSERT_EQ(to_s(carreraChars), "[1, 2, 3]");
+
+	carreraChars.nuevoCorredor('x','3');
+	ASSERT_EQ(to_s(carreraChars), "[1, 2, x, 3]");
+	
+	carreraChars.seCansa('1');
+	carreraChars.seCansa('2');
+
+	ASSERT_EQ(to_s(carreraChars), "[x, 3]");
+
+    	ASSERT_EQ(carreraChars.damePrimero(),'x');
+    	
+	ASSERT_EQ(carreraChars.corredorFilmado(), 'x');
+	
+	carreraChars.sobrepasar('x');	
+
+	ASSERT_EQ(to_s(carreraChars), "[3, x]");
+	//ASSERT_EQ(carreraChars.damePosicion(1),'x');
+}	
+
 int main() {
     RUN_TEST(check_crear_carrera_vacia);
     RUN_TEST(check_agregar_corredores);
@@ -347,5 +373,6 @@ int main() {
     RUN_TEST(check_agregar_corredores4);
     RUN_TEST(check_copiar_carrera2);
     RUN_TEST(check_corredor_filmado2);
+    RUN_TEST(check_carrera_chars);
     return 0;
 }
