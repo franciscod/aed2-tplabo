@@ -343,7 +343,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 		unsigned int pos = 1;
 		Nodo *c = this->primero;
 
-		while (c->corredor != corredor) {
+		while (!(c->corredor == corredor)) {
 			pos++;
 			c = c->atras;
 		}
@@ -378,15 +378,15 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 	template<typename T>
 	bool CorrePocoyo<T>::operator==(const CorrePocoyo<T>& otro) const{
 
-		if (  (this->primero->corredor != otro.damePrimero())
-		   || (this->camara->corredor != otro.corredorFilmado())
-		   || (this->cantidadCorredores != otro.tamanio())
+		if ( !( (this->primero->corredor == otro.damePrimero())
+		   && (this->camara->corredor == otro.corredorFilmado())
+		   && (this->cantidadCorredores == otro.tamanio()))
 		) {
 			return false;
 		}
 
 		for (int i=1; i<=(this->cantidadCorredores); i++) {
-			if (this->dameCorredorEnPos(i) != otro.dameCorredorEnPos(i)) {
+			if (!(this->dameCorredorEnPos(i) == otro.dameCorredorEnPos(i))) {
 				return false;
 			}
 		}
@@ -418,7 +418,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 		Nodo *c = this->primero;
 
-		while ((c != NULL) && (c->corredor != corredor)) {
+		while ((c != NULL) && !(c->corredor == corredor)) {
 			c = c->atras;
 		}
 
@@ -428,7 +428,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 	template<typename T>
 	typename CorrePocoyo<T>::Nodo * CorrePocoyo<T>::darNodoConCorredor(const T& corredor){
 		Nodo *c = this->primero;
-		while (c->corredor != corredor) {
+		while (!(c->corredor == corredor)) {
 			c = c->atras;
 		}
 		return c;
