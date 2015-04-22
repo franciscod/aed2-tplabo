@@ -380,9 +380,10 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 	template<typename T>
 	bool CorrePocoyo<T>::operator==(const CorrePocoyo<T>& otro) const{
 
-		if ( !( (*this->primero->corredor == otro.damePrimero())
-		   && (*this->camara->corredor == otro.corredorFilmado())
-		   && (this->cantidadCorredores == otro.tamanio()))
+		if ( !( (this->esVacia() == otro.esVacia())
+                     && (*this->primero->corredor == otro.damePrimero())
+		     && (*this->camara->corredor == otro.corredorFilmado())
+		     && (this->cantidadCorredores == otro.tamanio()) )
 		) {
 			return false;
 		}

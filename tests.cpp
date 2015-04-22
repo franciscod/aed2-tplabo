@@ -360,6 +360,26 @@ void check_carrera_chars(){
 	ASSERT_EQ(carrera.dameCorredorEnPos(2),'x');
 }	
 
+void check_carrera_inception(){
+	CorrePocoyo< CorrePocoyo<int> > inception;
+	CorrePocoyo<int> corredor, corredor2;
+	inception.nuevoCorredor(corredor);
+	
+	ASSERT_EQ(inception.tamanio(),1);
+	ASSERT_EQ(to_s(inception), "[[]]");
+
+        corredor2.nuevoCorredor(1);
+        corredor2.nuevoCorredor(42);
+
+        inception.nuevoCorredor(corredor2);
+
+	ASSERT_EQ(to_s(inception), "[[], [1, 42]]");
+
+        corredor2.sobrepasar(42);
+
+	ASSERT_EQ(to_s(inception), "[[], [1, 42]]");
+}
+
 int main() {
     RUN_TEST(check_crear_carrera_vacia);
     RUN_TEST(check_agregar_corredores);
@@ -377,5 +397,6 @@ int main() {
     RUN_TEST(check_copiar_carrera2);
     RUN_TEST(check_corredor_filmado2);
     RUN_TEST(check_carrera_chars);
+    RUN_TEST(check_carrera_inception); 
     return 0;
 }
