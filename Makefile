@@ -10,4 +10,4 @@ tests: build
 	./tests
 
 valgrind: build
-	valgrind --leak-check=full ./tests
+	valgrind --leak-check=full --track-origins=yes ./tests
