@@ -4,7 +4,7 @@ clean:
 	rm -f tests
 
 build:
-	g++ -g -o tests -Wall -fmessage-length=0 tests.cpp
+	g++ --std=c++11 -g -o tests -Wall -fmessage-length=0 tests.cpp
 
 tests: build
 	./tests

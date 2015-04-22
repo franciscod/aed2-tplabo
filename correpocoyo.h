@@ -203,10 +203,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 			return; // ignora agregar a uno que ya estaba
 		}
 
-		Nodo* n = new Nodo();
-		n->corredor = T(corredor);
-		n->adelante = NULL;
-		n->atras = NULL;
+		Nodo* n = new Nodo({T(corredor), NULL, NULL});
 
 		if (this->esVacia()) {
 			this->primero = n;
@@ -228,10 +225,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 			return; // ignora agregar a uno que ya estaba
 		}
 
-		Nodo* n = new Nodo();
-		n->corredor = corredor;
-		n->adelante = NULL;
-		n->atras = NULL;
+		Nodo* n = new Nodo({T(corredor), NULL, NULL});
 
 		Nodo *c = darNodoConCorredor(delanteDe);
 
