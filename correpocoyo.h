@@ -157,16 +157,16 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 	template<typename T>
 	CorrePocoyo<T>::CorrePocoyo(){
-		cantidadCorredores = 0;
-		primero = NULL;
-		ultimo = NULL;
-		camara = NULL;
+		this->cantidadCorredores = 0;
+		this->primero = NULL;
+		this->ultimo = NULL;
+		this->camara = NULL;
 	}
 
 	template<typename T>
 	CorrePocoyo<T>::CorrePocoyo(const CorrePocoyo<T>& otro){
 
-		cantidadCorredores = 0;
+		this->cantidadCorredores = 0;
 
 		Nodo *c = otro.primero;
 
@@ -336,7 +336,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 	template<typename T>
 	const T& CorrePocoyo<T>::corredorFilmado() const{
 
-		return camara->corredor;
+		return this->camara->corredor;
 	}
 
 	template<typename T>
@@ -359,7 +359,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 	template<typename T>
 	const T& CorrePocoyo<T>::damePrimero() const{
-		return primero->corredor;
+		return this->primero->corredor;
 	}
 
 	template<typename T>
@@ -391,12 +391,12 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 	template<typename T>
 	bool CorrePocoyo<T>::esVacia() const{
-		return cantidadCorredores == 0;
+		return this->cantidadCorredores == 0;
 	}
 
 	template<typename T>
 	int CorrePocoyo<T>::tamanio() const{
-		return cantidadCorredores;
+		return this->cantidadCorredores;
 	}
 
 	template<typename T>
