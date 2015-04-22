@@ -146,6 +146,7 @@ class CorrePocoyo{
 	Nodo* camara;
 
 	bool estaCorredor(const T&) const;
+	Nodo* darNodoConCorredor(const T&);
 };
 
 template<class T>
@@ -228,15 +229,11 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 		}
 
 		Nodo* n = new Nodo();
-		n->corredor = T(corredor);
+		n->corredor = corredor;
 		n->adelante = NULL;
 		n->atras = NULL;
 
-		Nodo *c = this->primero;
-
-		while (c->corredor != delanteDe) {
-			c = c->atras;
-		}
+		Nodo *c = darNodoConCorredor(delanteDe);
 
 		n->adelante  = c->adelante;
 
@@ -257,11 +254,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 	template<typename T>
 	void CorrePocoyo<T>::seCansa(const T& corredor){
 
-		Nodo *c = this->primero;
-
-		while (c->corredor != corredor) {
-			c = c->atras;
-		}
+		Nodo *c = darNodoConCorredor(corredor);
 
 		Nodo* bye = c;
 		if (this->camara == bye) {
@@ -290,11 +283,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 	template<typename T>
 	void CorrePocoyo<T>::sobrepasar(const T& corredor){
 
-		Nodo *c = this->primero;
-
-		while (c->corredor != corredor) {
-			c = c->atras;
-		}
+		Nodo *c = darNodoConCorredor(corredor);
 
 		Nodo * d = c->adelante;
 
@@ -435,5 +424,13 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 		return c != NULL;
 	}
-
+	
+	template<typename T>
+	typename CorrePocoyo<T>::Nodo * CorrePocoyo<T>::darNodoConCorredor(const T& corredor){
+		Nodo *c = this->primero;
+		while (c->corredor != corredor) {
+			c = c->atras;
+		}
+		return c;
+	}
 #endif //CORREPOCOYO_H_
