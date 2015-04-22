@@ -207,8 +207,12 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 
 	template<typename T>
 	CorrePocoyo<T>::~CorrePocoyo(){
-		while (this->primero != NULL) {
-			this->seCansa(this->primero->corredor);
+		Nodo* n = this->primero;
+		Nodo* bye;
+		while (n != NULL) {
+			bye = n;
+			n = n->atras;
+			delete bye;
 		}
 	}
 
