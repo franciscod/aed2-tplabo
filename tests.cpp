@@ -84,6 +84,26 @@ void check_agregar_corredores3() {
 }
 
 
+void check_agregar_corredores4() {
+    CorrePocoyo<int> carrera;
+
+    // se ignora agregar un corredor que ya estaba
+
+    carrera.nuevoCorredor(1);
+    ASSERT_EQ(carrera.tamanio(), 1);
+    ASSERT_EQ(to_s(carrera), "[1]");
+
+    carrera.nuevoCorredor(1, 1);
+    ASSERT_EQ(carrera.tamanio(), 1);
+    ASSERT_EQ(to_s(carrera), "[1]");
+
+    carrera.nuevoCorredor(1);
+    ASSERT_EQ(carrera.tamanio(), 1);
+    ASSERT_EQ(to_s(carrera), "[1]");
+
+}
+
+
 /*
  * Se copia una carrera y verifica que sus atributos sean iguales.
  * OJO! Este test puede pasar aun si implementan mal el constructor
@@ -211,6 +231,55 @@ void check_corredor_filmado() {
     ASSERT_EQ(carrera.corredorFilmado(),22);
 }
 
+void check_corredor_filmado2() {
+    CorrePocoyo<int> carrera;
+    carrera.nuevoCorredor(1);
+
+    ASSERT_EQ(carrera.corredorFilmado(), 1);
+    carrera.nuevoCorredor(2);
+    carrera.nuevoCorredor(3);
+
+    ASSERT_EQ(carrera.corredorFilmado(), 1); // agregar corredores no mueve la camara
+
+    carrera.filmarProxPerdedor();
+    ASSERT_EQ(carrera.corredorFilmado(), 2);
+    carrera.filmarProxExitoso();
+    ASSERT_EQ(carrera.corredorFilmado(), 1);
+    carrera.filmarProxExitoso(); // el primero es el mas exitoso, la camara se queda ahi
+    ASSERT_EQ(carrera.corredorFilmado(), 1);
+    carrera.filmarProxPerdedor();
+    ASSERT_EQ(carrera.corredorFilmado(), 2);
+    carrera.filmarProxPerdedor();
+    ASSERT_EQ(carrera.corredorFilmado(), 3);
+    carrera.filmarProxPerdedor();
+    ASSERT_EQ(carrera.corredorFilmado(), 4);
+    carrera.filmarProxPerdedor(); // el ultimo es el mas perdedor, la camara se queda ahi
+    ASSERT_EQ(carrera.corredorFilmado(), 4);
+    carrera.seCansa(4);
+    ASSERT_EQ(carrera.corredorFilmado(), 3); // si se cansa el ultimo, la camara va al nuevo ultimo
+    carrera.filmarProxExitoso();
+    carrera.filmarProxExitoso();
+    ASSERT_EQ(carrera.corredorFilmado(), 1);
+    carrera.seCansa(1); // si se cansa el primero, la camara va al nuevo primero
+    ASSERT_EQ(carrera.corredorFilmado(), 2);
+    carrera.seCansa(3);  // si se cansa uno que no esta siendo filmado, se sigue filmando al mismo
+    ASSERT_EQ(carrera.corredorFilmado(), 2);
+
+    carrera.nuevoCorredor(3);
+    carrera.nuevoCorredor(4);
+    carrera.nuevoCorredor(5);
+    carrera.nuevoCorredor(6);
+
+    carrera.filmarProxExitoso();
+    carrera.filmarProxExitoso();
+
+    ASSERT_EQ(carrera.corredorFilmado(), 4);
+
+    carrera.seCansa(4);
+    ASSERT_EQ(carrera.corredorFilmado(), 5); // si se cansa uno que tiene alguien detras, filmo a ese
+
+}
+
 /*
  * Verifica que el primero sea el que tiene que ser el primero
  */
@@ -264,14 +333,18 @@ int main() {
     RUN_TEST(check_crear_carrera_vacia);
     RUN_TEST(check_agregar_corredores);
     RUN_TEST(check_agregar_corredores2);
-    RUN_TEST(check_agregar_corredores3);
     RUN_TEST(check_copiar_carrera);
-    RUN_TEST(check_copiar_carrera2);
     RUN_TEST(check_se_cansa);
     RUN_TEST(check_sobrepasar);
     RUN_TEST(check_corredor_filmado);
     RUN_TEST(check_primero);
     RUN_TEST(check_posicion);
+    
+    // tests que agregamos nosotros
+    RUN_TEST(check_agregar_corredores3);
+    RUN_TEST(check_agregar_corredores4);
+    RUN_TEST(check_copiar_carrera2);
+    RUN_TEST(check_corredor_filmado2);
     return 0;
 }
 
