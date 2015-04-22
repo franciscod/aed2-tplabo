@@ -191,6 +191,8 @@ void check_sobrepasar() {
     carrera.nuevoCorredor(27);
     carrera.nuevoCorredor(20,22);
 
+    ASSERT_EQ(to_s(carrera), "[10, 20, 22, 27]");
+
     carrera.sobrepasar(22);
 
     ASSERT_EQ(to_s(carrera), "[10, 22, 20, 27]");
