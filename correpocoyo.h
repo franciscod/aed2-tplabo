@@ -169,7 +169,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 		Nodo *c = otro.primero;
 
 		Nodo* n = new Nodo();
-		n->corredor = c->corredor;
+		n->corredor = T(c->corredor);
 
 		this->primero = n;
 		this->camara = n;
@@ -183,7 +183,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 		while (c != NULL) {
 			m = n;
 			n = new Nodo();
-			n->corredor = c->corredor;
+			n->corredor = T(c->corredor);
 
 			n->anterior = m;
 			m->siguiente = n;
@@ -214,7 +214,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 	void CorrePocoyo<T>::nuevoCorredor(const T& corredor){
 
 		Nodo* n = new Nodo();
-		n->corredor = corredor;
+		n->corredor = T(corredor);
 
 		if (this->esVacia()) {
 			this->primero = n;
@@ -233,7 +233,7 @@ ostream& operator<<(ostream& out, const CorrePocoyo<T>& a) {
 	void CorrePocoyo<T>::nuevoCorredor(const T& corredor, const T& delanteDe){
 
 		Nodo* n = new Nodo();
-		n->corredor = corredor;
+		n->corredor = T(corredor);
 
 		Nodo *c = this->primero;
 
