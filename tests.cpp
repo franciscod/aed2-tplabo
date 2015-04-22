@@ -332,29 +332,32 @@ void check_posicion() {
 }
 
 void check_carrera_chars(){
-	CorrePocoyo<char> carreraChars;
-	carreraChars.nuevoCorredor('1');
-	carreraChars.nuevoCorredor('2');
-	carreraChars.nuevoCorredor('3');
+	CorrePocoyo<char> carrera;
+	carrera.nuevoCorredor('1');
+	carrera.nuevoCorredor('2');
+	carrera.nuevoCorredor('3');
 
-	ASSERT_EQ(to_s(carreraChars), "[1, 2, 3]");
+	ASSERT_EQ(to_s(carrera), "[1, 2, 3]");
 
-	carreraChars.nuevoCorredor('x','3');
-	ASSERT_EQ(to_s(carreraChars), "[1, 2, x, 3]");
+	carrera.nuevoCorredor('x','3');
+	ASSERT_EQ(to_s(carrera), "[1, 2, x, 3]");
 	
-	carreraChars.seCansa('1');
-	carreraChars.seCansa('2');
+	carrera.seCansa('1');
+	carrera.seCansa('2');
 
-	ASSERT_EQ(to_s(carreraChars), "[x, 3]");
+	ASSERT_EQ(to_s(carrera), "[x, 3]");
 
-    	ASSERT_EQ(carreraChars.damePrimero(),'x');
+    	ASSERT_EQ(carrera.damePrimero(),'x');
     	
-	ASSERT_EQ(carreraChars.corredorFilmado(), 'x');
+	ASSERT_EQ(carrera.corredorFilmado(), 'x');
 	
-	carreraChars.sobrepasar('x');	
+	carrera.sobrepasar('3');	
 
-	ASSERT_EQ(to_s(carreraChars), "[3, x]");
-	//ASSERT_EQ(carreraChars.damePosicion(1),'x');
+	ASSERT_EQ(to_s(carrera), "[3, x]");
+
+	ASSERT_EQ(carrera.damePosicion('x'),2);
+
+	ASSERT_EQ(carrera.dameCorredorEnPos(2),'x');
 }	
 
 int main() {
